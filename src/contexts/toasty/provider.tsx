@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from "react";
 
-import AuthContext from "./context"
-import { IAuthProviderProps } from "./dto"
+import ToastyContext from "./context"
+import { IToastyProviderProps, IToasty } from "./dto"
 
-const AuthProvider: React.FC<IAuthProviderProps> = ({ children, loginCall }) => {
-    const [loginLoading, setLoginLoading] = useState(false)
+const ToastyProvider: React.FC<IToastyProviderProps> = ({ children, loginCall }) => {
+    const [toasts, setToasts] = useState<IToasty[]>([])
     const [token, setToken] = useState<string>("")
 
     const login = async () => {
@@ -34,10 +34,12 @@ const AuthProvider: React.FC<IAuthProviderProps> = ({ children, loginCall }) => 
     ])
 
     return (
-        <AuthContext.Provider value={providerValue}>
+        <ToastyContext.Provider value={providerValue}>
+            
             {children}
-        </AuthContext.Provider>
+
+        </ToastyContext.Provider>
     )
 }
 
-export default AuthProvider
+export default ToastyProvider
